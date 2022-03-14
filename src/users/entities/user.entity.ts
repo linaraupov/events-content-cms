@@ -1,9 +1,11 @@
+import { Event } from 'src/events/entities';
 import {
   BeforeInsert,
   BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -38,6 +40,9 @@ export class User {
 
   @Column({ type: 'text' })
   password: string;
+
+  @OneToMany(() => Event, (event) => event.user)
+  events: Event[];
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;

@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { SignInDto } from './auth.dto';
-import { User } from 'src/users/user.entity';
-import { JwtPayload } from './auth.types';
-import { CreateOrUpdateUserDto } from 'src/users/users.dto';
-import { UsersService } from 'src/users/users.service';
+import { SignInDto } from '../dto/sign-in.dto';
+import { User } from 'src/users/entities';
+import { UsersService } from 'src/users/services';
+import { CreateUserDto } from 'src/users/dto';
+import { JwtPayload } from 'src/common/types';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const crypto = require('crypto');
@@ -48,9 +48,9 @@ export class AuthService {
     }
   }
 
-  async signUp(dto: CreateOrUpdateUserDto) {
+  async signUp(dto: CreateUserDto) {
     try {
-      const user = await this.usersService.createOrUpdate(dto);
+      const user = await this.usersService.createOne(dto);
 
       return await this.createJwtToken(user);
     } catch (err) {
