@@ -6,7 +6,7 @@ import { AppModule } from './app.module';
 
 const useSwagger = (app: INestApplication) => {
   const options = new DocumentBuilder()
-    .setTitle('Events  API')
+    .setTitle('Events content CMS API')
     .addBearerAuth({
       type: 'http',
       scheme: 'bearer',

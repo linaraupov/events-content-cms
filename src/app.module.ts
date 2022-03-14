@@ -5,9 +5,11 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import configurations from './common/config/configurations';
 import { JWTConfigService } from './common/services/jwt-config.service';
 import { TypeOrmConfigService } from './common/services/typeorm-config.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { TypeOrmConfigService } from './common/services/typeorm-config.service';
       useClass: JWTConfigService,
     }),
     PassportModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
